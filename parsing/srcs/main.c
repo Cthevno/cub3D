@@ -6,6 +6,23 @@
 #include <limits.h>
 
 
+
+char	*ft_strcnpy(char *dest, const char *src, size_t size)
+{
+	char	*original_dest;
+	size_t	i;
+
+	i = 0;
+	original_dest = dest;
+	while (i < size)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (original_dest);
+}
+
 void	ft_free(char **str)
 {
 	if (str && *str)
@@ -473,8 +490,8 @@ int	ft_copy_map(int start, t_map_path *map, int map_size)
 	{
 		line = get_next_line(fd);
 		map->map[i] = malloc (sizeof(char) * (ft_strlen_char(line, '\n') + 1));
-		if (!map->map[i])
-
+		// if (!map->map[i])
+			//fuck
 		ft_strncpy(map->map[i], line, ft_strlen_char(line, '\n'));
 		free(line);
 		i++;
