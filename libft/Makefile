@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: ctheveno <thevenot.corentin@gmail.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 00:52:17 by vblanc            #+#    #+#              #
-#    Updated: 2025/05/18 16:24:58 by vblanc           ###   ########.fr        #
+#    Updated: 2025/07/10 16:20:17 by ctheveno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,10 @@ SRCS := ft_abs.c ft_atoi.c ft_bzero.c ft_calloc.c ft_intlen.c ft_isalnum.c ft_is
 	ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c\
 	ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c\
 	ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strrev.c ft_strtrim.c\
-	ft_substr.c ft_tolower.c ft_toupper.c ft_strcmp.c ft_strlen_array.c
+	ft_substr.c ft_tolower.c ft_toupper.c ft_strcmp.c ft_strlen_array.c ft_strlen_char.c\
+	ft_strncpy.c ft_free.c ft_free_doble_tab.c ft_safe_atoi.c is_white_space.c\
+	gnl_utils.c gnl.c\
+
 OBJS := $(patsubst %.c,$(OBJDIR)/%.o, $(SRCS))
 DEPS := $(addprefix $(OBJDIR)/, $(FILES:.c=.d))
 

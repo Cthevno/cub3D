@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:58:15 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/14 20:48:20 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/07/10 16:33:09 by ctheveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,29 @@ int					ft_intlen(int n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strlen_array(char **array);
 unsigned int		ft_abs(int n);
+
+/* ************************************************************************** */
+/* ***************************** ctheveno functions ************************* */
+/* ************************************************************************** */
+
+size_t				ft_strlen_char(const char *s, char c);
+char				*ft_strncpy(char *dest, const char *src, size_t size);
+void				ft_free(char **str);
+void				ft_free_doble_tab(char **tab);
+int					ft_safe_atoi(const char *nptr, int *result);
+
+/* ************************************************************************** */
+/* ***************************** get_next_line ****************************** */
+/* ************************************************************************** */
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
+
+size_t				ft_strlen_gnl(const char *str);
+char				*scpy_gnl(char *dst, const char *src);
+int					schr_gnl(const char *s, int c);
+char				*ft_strjoin_gnl(char *s1, const char *s2);
+char				*get_next_line(int fd);
 
 #endif

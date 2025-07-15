@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 12:24:44 by vblanc            #+#    #+#              #
-#    Updated: 2025/06/17 14:11:40 by vblanc           ###   ########.fr        #
+#    Updated: 2025/07/10 16:34:21 by ctheveno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC := cc
-CFLAGS := -Wall -Werror -Wextra -MMD -MP -o3
+CFLAGS := -Wall -Werror -Wextra -MMD -MP -O3
 MLXFLAGS := -lXext -lX11 -lm -lpthread
 
 NAME := cub3D
@@ -24,19 +24,15 @@ INC_DIR_BONUS := -Iincludes -Iincludes/structs
 SRC_DIR_BONUS := srcs
 OBJ_DIR := objs
 
-FILES := main.c\
-		\
-		graphics/hooks.c\
-		graphics/mlx_use.c\
-		graphics/dda.c\
-		graphics/new_image.c\
-		graphics/minimap.c\
-		graphics/loop_hook.c\
-		\
-		utils/init_game.c\
-		utils/free_array.c\
-		\
-		\
+FILES := main.c \
+		graphics/hooks.c \
+		graphics/mlx_use.c \
+		graphics/dda.c \
+		graphics/new_image.c \
+		graphics/minimap.c \
+		graphics/loop_hook.c \
+		utils/init_game.c \
+		utils/free_array.c \
 		utils/test_file_game.c
 
 FILES_BONUS := main_bonus.c
@@ -59,6 +55,8 @@ MLX := $(MLX_DIR)/libmlx.a
 all: libft mlx $(NAME)
 
 bonus: libft mlx $(NAME_BONUS)
+
+parsing: libft
 
 libft:
 	@make -C libft

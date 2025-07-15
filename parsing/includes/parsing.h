@@ -23,7 +23,7 @@ typedef struct s_map_path
 {
 	// Map representation
 	char	*file_path;
-	int		**map;
+	char		**map;
 	int		map_width;
 	int		map_height;
 
