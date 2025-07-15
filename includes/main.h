@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 16:07:05 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/18 12:42:46 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/07/15 10:47:39 by ctheveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ void	minimap(t_game *game);
 
 /* temp */
 int		test_fill_game(t_game *game);
+/* parsing */
+int	parsing(int ac, char **av);
 
 #endif

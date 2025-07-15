@@ -6,14 +6,20 @@
 /*   By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:37:37 by vblanc            #+#    #+#             */
-/*   Updated: 2025/07/10 16:35:03 by ctheveno         ###   ########.fr       */
+/*   Updated: 2025/07/15 10:44:58 by ctheveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+#include <fcntl.h>
+#include "../includes/parsing.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
+	return (parsing(ac, av));
+}
+// int	main(void)
+// {
 	// parsing
 	// t_game	*game;
 
@@ -28,5 +34,5 @@ int	main(void)
 	// fill_camera(game);
 	// mlx_loop_hook(game->mlx->mlx_ptr, loop_hook, game);
 	// mlx_loop(game->mlx->mlx_ptr);
-	return (0);
-}
+// 	return (0);
+// }

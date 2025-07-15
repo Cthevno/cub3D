@@ -6,7 +6,7 @@
 #    By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 12:24:44 by vblanc            #+#    #+#              #
-#    Updated: 2025/07/10 16:34:21 by ctheveno         ###   ########.fr        #
+#    Updated: 2025/07/15 16:08:30 by ctheveno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,15 @@ FILES := main.c \
 		graphics/loop_hook.c \
 		utils/init_game.c \
 		utils/free_array.c \
-		utils/test_file_game.c
+		utils/test_file_game.c \
+		parsing/clean_parsing.c \
+		parsing/error.c \
+		parsing/floor_and_ceilling_rgb.c \
+		parsing/parsing.c \
+		parsing/map_grid.c \
+		parsing/map_grid_start.c \
+		parsing/texture_paths.c \
+		parsing/valid_map.c \
 
 FILES_BONUS := main_bonus.c
 
@@ -46,47 +54,54 @@ OBJS_BONUS := $(addprefix $(OBJ_DIR)/, $(FILES_BONUS:.c=.o))
 DEPS_BONUS := $(addprefix $(OBJ_DIR)/, $(FILES_BONUS:.c=.d))
 
 LIBFT_DIR := libft
+PRINTF_FD_BUFFER_DIR := printf_fd_buffer
 MLX_DIR := minilibx-linux
 
 LIBFT := $(LIBFT_DIR)/libft.a
+PRINTF_FD_BUFFER := $(PRINTF_FD_BUFFER_DIR)/ft_printf.a
 MLX := $(MLX_DIR)/libmlx.a
 
 
-all: libft mlx $(NAME)
+all: libft mlx printf_fd_buffer $(NAME)
 
-bonus: libft mlx $(NAME_BONUS)
-
-parsing: libft
+bonus: libft mlx printf_fd_buffer $(NAME_BONUS)
 
 libft:
 	@make -C libft
+
+printf_fd_buffer:
+	@make -C printf_fd_buffer
 
 mlx:
 	@make -C minilibx-linux;
 
 $(NAME): $(OBJS)
 	@make -C libft
+	@make -C printf_fd_buffer;
 	@make -C minilibx-linux;
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF_FD_BUFFER) $(MLX) $(MLXFLAGS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC_DIR) -I$(LIBFT_DIR) -I$(PRINTF_FD_BUFFER_DIR) -I$(MLX_DIR) -c $< -o $@
 
 $(NAME_BONUS): $(OBJS_BONUS)
-	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME_BONUS)
+	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT) $(PRINTF_FD_BUFFER) $(MLX) $(MLXFLAGS) -o $(NAME_BONUS)
 
 $(OBJ_DIR_BONUS)/%.o: $(SRC_DIR_BONUS)/%.c
 	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC_DIR_BONUS) -I$(LIBFT_DIR) -I$(PRINTF_FD_BUFFER_DIR) -I$(MLX_DIR) -c $< -o $@
 	$(CC) $(CFLAGS) $(INC_DIR_BONUS) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $< -o $@
 
 clean:
 	@make -C libft clean
+	@make -C printf_fd_buffer clean
 	@make -C minilibx-linux clean
 	$(RM) $(OBJ_DIR)
 
 fclean:
 	@make -C libft fclean
+	@make -C printf_fd_buffer fclean
 	@make -C minilibx-linux clean
 	$(RM) $(OBJ_DIR)
 	$(RM) $(NAME)
@@ -99,4 +114,4 @@ norm:
 
 -include $(DEPS)
 
-.PHONY: all bonus libft mlx clean fclean re norm
+.PHONY: all bonus libft printf_fd_buffer mlx clean fclean re norm

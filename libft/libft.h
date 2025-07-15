@@ -6,7 +6,7 @@
 /*   By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:58:15 by vblanc            #+#    #+#             */
-/*   Updated: 2025/07/10 16:33:09 by ctheveno         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:31:54 by ctheveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,12 @@ unsigned int		ft_abs(int n);
 /* ************************************************************************** */
 
 size_t				ft_strlen_char(const char *s, char c);
+char				*ft_strcpy(char *dest, const char *src);
 char				*ft_strncpy(char *dest, const char *src, size_t size);
 void				ft_free(char **str);
 void				ft_free_doble_tab(char **tab);
 int					ft_safe_atoi(const char *nptr, int *result);
+int					is_white_space(char c);
 
 /* ************************************************************************** */
 /* ***************************** get_next_line ****************************** */
