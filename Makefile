@@ -6,13 +6,13 @@
 #    By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 12:24:44 by vblanc            #+#    #+#              #
-#    Updated: 2025/07/15 16:08:30 by ctheveno         ###   ########.fr        #
+#    Updated: 2025/07/27 16:04:25 by ctheveno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC := cc
 CFLAGS := -Wall -Werror -Wextra -MMD -MP -O3
-MLXFLAGS := -lXext -lX11 -lm -lpthread
+MLXFLAGS := -lXext -lX11 -lm -lpthread -L/opt/X11/lib -I/opt/X11/include
 
 NAME := cub3D
 NAME_BONUS := cub3D_bonus
