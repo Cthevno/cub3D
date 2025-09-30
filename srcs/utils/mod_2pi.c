@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_dda.h                                            :+:      :+:    :+:   */
+/*   mod_2pi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/15 17:19:52 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/15 18:55:20 by vblanc           ###   ########.fr       */
+/*   Created: 2025/08/21 15:28:16 by vblanc            #+#    #+#             */
+/*   Updated: 2025/08/21 15:30:01 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_DDA_H
-# define S_DDA_H
+#include "main.h"
 
-typedef struct s_dda
+double	mod_2pi(double x)
 {
-	double	delta_d[2];
-	double	step[2];
-	double	side_d[2];
-	int		dir;
-	double	wall_d;
-}			t_dda;
-
-#endif
+	if (x < 0)
+		x += 2 * PI;
+	else if (x > 2 * PI)
+		x -= 2 * PI;
+	return (x);
+}

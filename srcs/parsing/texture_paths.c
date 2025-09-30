@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture_paths.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/11 13:46:23 by ctheveno          #+#    #+#             */
+/*   Updated: 2025/09/30 15:17:33 by ctheveno         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "./parsing.h"
 #include "../../libft/libft.h"
@@ -14,6 +26,8 @@ size_t	find_path_start(char *str)
 	}
 	while (str && is_white_space(*str))
 	{
+		if (*str == '\n')
+			break ;
 		move++;
 		str++;
 	}
@@ -23,6 +37,7 @@ size_t	find_path_start(char *str)
 size_t	get_path_len(char *str)
 {
 	size_t	len;
+
 	len = 0;
 	while (str && *str)
 	{
@@ -53,7 +68,6 @@ int	get_path(char c, char *str, t_map_path *map)
 	size_t	i;
 
 	len = 0;
-	len += find_path_start(str);
 	str += find_path_start(str);
 	len += get_path_len(str);
 	copy_path = NULL;
@@ -61,7 +75,7 @@ int	get_path(char c, char *str, t_map_path *map)
 	if (!copy_path)
 		return (len);
 	i = 0;
-	while (i < len)//strncpy
+	while (i < len)
 	{
 		if (*str == '\n' || is_white_space(*str))
 			break ;

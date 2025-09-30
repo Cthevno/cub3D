@@ -3,24 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:37:37 by vblanc            #+#    #+#             */
-/*   Updated: 2025/07/27 15:59:19 by ctheveno         ###   ########.fr       */
+/*   Updated: 2025/09/19 14:08:48 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
-#include <fcntl.h>
 #include "../includes/parsing.h"
+#include "main.h"
+#include "parsing.h"
+#include <fcntl.h>
 
-// int	main(int ac, char **av)
-// {
-// 	return (parsing(ac, av));
-// }
-int	main(void)
+int	main(int ac, char **av)
 {
-	// parsing
 	t_game	*game;
 
 	game = NULL;
@@ -29,9 +25,12 @@ int	main(void)
 		printf("Error initializing game\n");
 		return (1);
 	}
-	if (test_fill_game(game))
+	if (parsing(ac, av, game))
+	{
+		printf("Error during parsing\n");
+		clear_parsing(game);
 		return (1);
-	fill_camera(game);
+	}
 	mlx_loop_hook(game->mlx->mlx_ptr, loop_hook, game);
 	mlx_loop(game->mlx->mlx_ptr);
 	return (0);

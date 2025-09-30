@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 16:01:42 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/18 12:30:12 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/09/19 14:03:48 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static int	keyd_manager(int keycode, t_game *game)
 		game->hooks[LEFT] = true;
 	else if (keycode == RIGHT_MAC || keycode == RIGHT_LINUX)
 		game->hooks[RIGHT] = true;
-	else if (keycode == SPACE_MAC || keycode == SPACE_LINUX)
-		open_door(game);
 	return (0);
 }
 
@@ -47,8 +45,6 @@ static int	keyu_manager(int keycode, t_game *game)
 		game->hooks[LEFT] = false;
 	else if (keycode == RIGHT_MAC || keycode == RIGHT_LINUX)
 		game->hooks[RIGHT] = false;
-	else if (keycode == SPACE_MAC || keycode == SPACE_LINUX)
-		game->hooks[SPACE] = false;
 	return (0);
 }
 
@@ -71,10 +67,6 @@ int	init_mlx(t_game *game)
 	mlx_hook(game->mlx->mlx_win, ON_KEYDOWN, KeyPressMask, keyd_manager, game);
 	mlx_hook(game->mlx->mlx_win, ON_KEYUP, KeyReleaseMask, keyu_manager, game);
 	mlx_hook(game->mlx->mlx_win, ON_DESTROY, 0, clear_game, game);
-	mlx_mouse_move(game->mlx->mlx_ptr, game->mlx->mlx_win, W_WIDTH / 2, W_HEIGHT
-		/ 2);
-	mlx_mouse_hide(game->mlx->mlx_ptr, game->mlx->mlx_win);
-	mlx_set_font(game->mlx->mlx_ptr, game->mlx->mlx_win, "9x15bold");
 	return (0);
 }
 
@@ -85,18 +77,14 @@ int	clear_game(t_game *game)
 	mlx_destroy_display(game->mlx->mlx_ptr);
 	free(game->mlx->mlx_ptr);
 	free(game->mlx);
-	free_array(game->map->map, game->map->map_width);
+	free_array(game->map->map, game->map->map_height);
 	free_array(game->map->texture_north, TEXTURE_SIZE);
 	free_array(game->map->texture_south, TEXTURE_SIZE);
 	free_array(game->map->texture_east, TEXTURE_SIZE);
 	free_array(game->map->texture_west, TEXTURE_SIZE);
-	free_array(game->map->texture_door, TEXTURE_SIZE);
-	free_array(game->map->texture_sprite[0], TEXTURE_SIZE);
-	free_array(game->map->texture_sprite[1], TEXTURE_SIZE);
-	free(game->map->texture_sprite);
 	free(game->map);
 	free(game->player);
-	free(game->camera);
+	free(game->ray);
 	free(game);
 	exit(0);
 	return (0);

@@ -1,0 +1,22 @@
+
+
+NO         ./assets/textures/colorstone.xpm
+
+
+SO ./assets/textures/eagle.xpm
+
+WE ./assets/textures/redbrick.xpm
+
+
+EA     ./assets/textures/wood.xpm
+
+
+F      220,100,0   j
+C 225,30,0
+
+1111111
+1N00001
+1000001
+1000001
+1000001
+1111111

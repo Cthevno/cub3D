@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   s_map.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 13:09:14 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/30 15:23:03 by ctheveno         ###   ########.fr       */
+/*   Updated: 2025/08/21 16:21:37 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define S_MAP_H
 
 // map:
-// 2D array representing the map (0 for no walls, 1 for walls)
+// 2D array representing the map;
+// 0 for no walls, 1 for walls, 2 for door, 3 for sprite
 
 // map_width, map_height:
 // Dimensions of the map
@@ -41,17 +42,6 @@ typedef struct s_map
 	int	***texture_sprite;
 	int	floor_color;
 	int	ceiling_color;
-	/*
-	how to convert 220,100,0 in int with bits shifting
-	RGB,
-	Red : Left most byte used
-	Green : middle
-	Blue : right most used
-	One byte = 8 bits.
-	so if colour : 220,100,0
-	int red = 220, green = 100, blue = 0;
-	colour = (220 << 16) | (100 << 8) | 0; || colour = (red << 16) | (green << 8) | b; || (220 * 2^16) | (100 * 2^8) | 0;
-	*/
 }		t_map;
 
 #endif

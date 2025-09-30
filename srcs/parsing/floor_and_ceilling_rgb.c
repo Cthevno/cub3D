@@ -6,7 +6,7 @@
 /*   By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:30:59 by ctheveno          #+#    #+#             */
-/*   Updated: 2025/07/15 15:48:37 by ctheveno         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:53:37 by ctheveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,18 @@ static int	get_rgb_colour_int(char **rgb_values_strings)
 	return ((r << 16) | (g << 8) | b);
 }
 
+static int	valid_colour_string(char **colour_array)
+{
+	int	i;
+
+	i = 0;
+	while (colour_array[i])
+		i++;
+	if (i != 3)
+		return (0);
+	return (1);
+}
+
 size_t	get_rgb_colour(char c, char *str, t_map_path *map)
 {
 	size_t	move;
@@ -91,6 +103,11 @@ size_t	get_rgb_colour(char c, char *str, t_map_path *map)
 	move += get_path_len(str);
 	rgb_values_strings = NULL;
 	rgb_values_strings = get_rgb_colour_strings(str);
+	if (!valid_colour_string(rgb_values_strings))
+	{
+		ft_free_doble_tab(rgb_values_strings);
+		return (0);
+	}
 	if (c == 'F')
 		map->floor_color = get_rgb_colour_int(rgb_values_strings);
 	if (c == 'C')

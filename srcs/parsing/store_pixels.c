@@ -1,57 +1,67 @@
-// #include "mlx_use.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   store_pixels.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/11 13:53:05 by ctheveno          #+#    #+#             */
+/*   Updated: 2025/09/11 14:33:38 by ctheveno         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../minilibx-linux/mlx.h"
-#include <stdio.h>
 #include <stdlib.h>
-// #include "../../libft/libft.h"
-// #include "../printf_fd_buffer/header/ft_printf.h"
 #include <stdio.h>
-#include "../../includes/parsing.h"
 #include <limits.h>
 #include <fcntl.h>
+#include "parsing.h"
 
-typedef struct s_pixel_storing
+static int	store_pixels_loop_helper(t_pixel_storing p_s, int ***texture_array)
 {
-    void *mlx_ptr;
-    void *img_ptr;
-    char *img_data;
-    int width;
-    int height;
-    int bits_per_pixel;
-    int size_line;
-    int endian;
-}t_pixel_storing;
+	int	i;
+	int	j;
 
-int copy_texture_array()
-{
-
-    return (1);
+	i = 0;
+	while (i < p_s.height)
+	{
+		(*texture_array)[i] = malloc(p_s.width * sizeof(int));
+		if (!(*texture_array)[i])
+			return (0);
+		j = 0;
+		while (j < p_s.width)
+		{
+			(*texture_array)[i][j] = *(int *)(p_s.img_data
+					+ (i * p_s.size_line + j * (p_s.bits_per_pixel / 8)));
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
+/*	t_pixel_storing	p_s; = pixel_storing */
 
-int store_pixels_from_xpm(char *img_path, int **texture_array)
+int	store_pixels_from_xpm(char *img_path, int ***texture_array, void *mlx_ptr)
 {
-    t_pixel_storing pixel_storing;
-    pixel_storing.mlx_ptr = mlx_init();
-    if (!pixel_storing.mlx_ptr)
-        return (1);
-    pixel_storing.img_ptr = mlx_xpm_file_to_image(pixel_storing.mlx_ptr, "../../assets/textures/colorstone.xpm", &pixel_storing.width, &pixel_storing.height);
-    if (!pixel_storing.img_ptr)
-    {
-        printf("Erreur: impossible de charger l'image\n");
-        return (1);
-    }
-    pixel_storing.img_data = mlx_get_data_addr(pixel_storing.img_ptr, &pixel_storing.bits_per_pixel, &pixel_storing.size_line, &pixel_storing.endian);
-    //pass by parameter path to the image and where to store it in the other struct
+	t_pixel_storing	p_s;
 
-    //copy in function by passing texture_array and pixel_storing_struct.
-    **texture_array = malloc(pixel_storing.height * sizeof(int*));
-    for (int i = 0; i < pixel_storing.height; i++)
-    {
-        texture_array[i] = malloc(pixel_storing.width * sizeof(int));
-        for (int j = 0; j < pixel_storing.width; j++)
-        {
-            texture_array[i][j] = *(int*)(pixel_storing.img_data + (i * pixel_storing.size_line + j * (pixel_storing.bits_per_pixel / 8)));
-        }
-    }
-    mlx_destroy_image(pixel_storing.mlx_ptr, pixel_storing.img_ptr);
-    return (0);
+	p_s.mlx_ptr = mlx_ptr;
+	if (!p_s.mlx_ptr)
+		return (1);
+	p_s.img_ptr = mlx_xpm_file_to_image(p_s.mlx_ptr,
+			img_path, &p_s.width, &p_s.height);
+	if (!p_s.img_ptr)
+		return (1);
+	p_s.img_data = mlx_get_data_addr(p_s.img_ptr, &p_s.bits_per_pixel,
+			&p_s.size_line, &p_s.endian);
+	*texture_array = malloc(p_s.height * sizeof(int *));
+	if (!*texture_array)
+	{
+		mlx_destroy_image(p_s.mlx_ptr, p_s.img_ptr);
+		return (1);
+	}
+	if (!store_pixels_loop_helper(p_s, texture_array))
+		return (1);
+	mlx_destroy_image(p_s.mlx_ptr, p_s.img_ptr);
+	return (0);
 }

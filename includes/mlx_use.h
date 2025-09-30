@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 15:59:49 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/18 12:36:53 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/08/21 16:10:03 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef enum e_event
 
 void	rotate_camera(double angle, t_game *game);
 void	move_player(int keycode, t_game *game);
-void	move_player_sides(int keycode, t_game *game);
 void	open_door(t_game *game);
 
 void	free_array(int **array, int size);

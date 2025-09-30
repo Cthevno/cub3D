@@ -6,14 +6,15 @@
 /*   By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:06:46 by ctheveno          #+#    #+#             */
-/*   Updated: 2025/07/15 16:07:12 by ctheveno         ###   ########.fr       */
+/*   Updated: 2025/09/30 14:23:10 by ctheveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./parsing.h"
-#include "../../libft/libft.h"
+#include "libft.h"
 #include <stdlib.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 int	found_first_map_line(char *line)
 {
@@ -35,9 +36,7 @@ int	find_map_grid_start(int i, int fd, char *line)
 	while (line != NULL)
 	{
 		if (found_first_map_line(line))
-		{
 			break ;
-		}
 		i++;
 		free(line);
 		line = get_next_line(fd);

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:09:27 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/18 12:16:48 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/08/21 15:23:37 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # define SPRITE_SPEED 20
 
 // PLAYER PARAMS
-# define FOV_PARAM 0.8
-# define MOVE_SPEED 0.06
-# define KEY_ROT_SPEED 0.08
-# define MOUSE_ROT_SPEED 0.12
+# define FOV 75
+# define MOVE_SPEED 0.2
+# define KEY_ROT_SPEED 0.05
+# define MOUSE_ROT_SPEED 0.06
 
 // HOOKS PARAMS
 # define MOUSE_DEAD_ZONE 0.005

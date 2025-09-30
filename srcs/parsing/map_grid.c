@@ -6,14 +6,14 @@
 /*   By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:30:34 by ctheveno          #+#    #+#             */
-/*   Updated: 2025/07/15 16:07:34 by ctheveno         ###   ########.fr       */
+/*   Updated: 2025/09/30 14:35:59 by ctheveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./parsing.h"
-#include "../../libft/libft.h"
+#include "libft.h"
 #include <stdlib.h>
-#include <fcntl.h>
+#include <fcntl.h>	
 
 int	map_grid_size(int i, t_map_path *map)
 {
@@ -85,6 +85,8 @@ int	extract_map_grid(int i, t_map_path *map)
 	int		map_size;
 
 	map_size = map_grid_size(i, map);
+	if (map_size == -1)
+		return (0);
 	map->map = malloc(sizeof(char *) * (map_size + 1));
 	if (!map->map)
 		return (0);

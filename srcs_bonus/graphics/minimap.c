@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: ctheveno <ctheveno@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 20:53:48 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/18 12:23:12 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/09/16 14:11:42 by ctheveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,17 @@ static void	fill_block(t_game *game, int x, int y, int color)
 	int	j;
 
 	i_max = MINIMAP_OFFSET + (x + 1) * (MINIMAP_BLOCK_SIZE
-			/ game->map->map_width);
-	j_max = MINIMAP_OFFSET + (y + 1) * (MINIMAP_BLOCK_SIZE
 			/ game->map->map_height);
-	i = MINIMAP_OFFSET + x * (MINIMAP_BLOCK_SIZE / game->map->map_width);
+	j_max = MINIMAP_OFFSET + (y + 1) * (1.5 * MINIMAP_BLOCK_SIZE
+			/ game->map->map_width);
+	i = MINIMAP_OFFSET + x * (MINIMAP_BLOCK_SIZE / game->map->map_height);
 	while (i < i_max)
 	{
-		j = MINIMAP_OFFSET + y * (MINIMAP_BLOCK_SIZE / game->map->map_height);
+		j = MINIMAP_OFFSET + y
+			* (1.5 * MINIMAP_BLOCK_SIZE / game->map->map_width);
 		while (j < j_max)
 		{
-			my_mlx_pixel_put(game->mlx, j, i, color);
+			my_mlx_pixel_put(game->mlx, i, j, color);
 			j++;
 		}
 		i++;
@@ -42,20 +43,20 @@ void	minimap(t_game *game)
 	int	y;
 
 	x = 0;
-	while (x < game->map->map_width)
+	while (x < game->map->map_height)
 	{
 		y = 0;
-		while (y < game->map->map_height)
+		while (y < game->map->map_width)
 		{
 			if (game->map->map[x][y] == 1 || game->map->map[x][y] == 3)
-				fill_block(game, x, y, 0x000000);
+				fill_block(game, y, x, 0x000000);
 			else if (game->map->map[x][y] == 2 || game->map->map[x][y] == -1)
-				fill_block(game, x, y, 0x00FFFF);
+				fill_block(game, y, x, 0x00FFFF);
 			else
-				fill_block(game, x, y, 0xFFFFFF);
+				fill_block(game, y, x, 0xFFFFFF);
 			y++;
 		}
 		x++;
 	}
-	fill_block(game, (int)game->player->x, (int)game->player->y, 0xFF0000);
+	fill_block(game, game->player->y, game->player->x, 0xFF0000);
 }
